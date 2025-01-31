@@ -42,7 +42,7 @@ def add_emoji(update, context):
     kata="ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     mayda='abcdefghijklmnopqrstuvwxyz'
     if update.message.text[0] not in kata and update.message.text[0] not in mayda:
-        db.insert({"emoji": update.message.text,'count':0})
+        db.insert({"emoji": update.message.text,'count':0},indent=4)
         update.message.reply_text("Good job i added your emoji to your list")
     
 
@@ -101,6 +101,7 @@ dispatcher = updater.dispatcher
 
 def clear(update,context):
     db.truncate()
+    update.message.reply_text('your history is cleaned')
 dispatcher.add_handler(CommandHandler('start',start))
 dispatcher.add_handler(MessageHandler(Filters.text('clear all list'), clear))
 dispatcher.add_handler(MessageHandler(Filters.text, add_emoji))
